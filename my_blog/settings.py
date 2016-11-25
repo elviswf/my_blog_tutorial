@@ -25,8 +25,6 @@ SECRET_KEY = 'zb1^722#j-ebjt%u)$@og=_+)d#6k)@!556ht(81m_ab^6+-a$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True  # True
 
-TEMPLATE_DEBUG = True  # True
-
 ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -43,11 +41,7 @@ INSTALLED_APPS = (
     'article',
 )
 SITE_ID = 1
-# from django.conf import global_settings
-#
-# TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
-#     'django.template.context_processors',
-# )
+
 BOOTSTRAP_ADMIN_SIDEBAR_MENU = True
 
 MIDDLEWARE_CLASSES = (
@@ -89,17 +83,21 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, './templates').replace('\\', '/'),
-)
-
-'''
-#尝试这种写法
-TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
-TEMPLATE_DIRS = (
-    TEMPLATE_PATH,
-    )
-'''
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates').replace('\\', '/'), ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
