@@ -13,8 +13,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import dj_database_url
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -23,17 +23,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'zb1^722#j-ebjt%u)$@og=_+)d#6k)@!556ht(81m_ab^6+-a$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True  #True
+DEBUG = True  # True
 
-TEMPLATE_DEBUG = True  #True
+TEMPLATE_DEBUG = True  # True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
 INSTALLED_APPS = (
     'bootstrap_admin',
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,14 +42,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'article',
 )
-
-from django.conf import global_settings
-TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
-    'django.core.context_processors.request',
-)
+SITE_ID = 1
+# from django.conf import global_settings
+#
+# TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+#     'django.template.context_processors',
+# )
 BOOTSTRAP_ADMIN_SIDEBAR_MENU = True
-
-
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -64,7 +63,6 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'my_blog.urls'
 
 WSGI_APPLICATION = 'my_blog.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -86,7 +84,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
@@ -94,7 +91,7 @@ STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, './templates').replace('\\', '/'),
-    )
+)
 
 '''
 #尝试这种写法
@@ -110,5 +107,5 @@ STATIC_ROOT = 'staticfiles'
 
 try:
     from .local_setting import *
-except ImportError :
+except ImportError:
     pass
